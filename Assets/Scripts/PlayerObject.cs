@@ -5,21 +5,18 @@ using UnityEngine;
 public class PlayerObject : MonoBehaviour
 {
     
-    public float playerMoveSpeed = 5.0f;
+    public float playerMoveSpeed = 6.0f;
 
     private float horizontal = 0.0f;
     private float vertical = 0.0f;
     private bool isFacingRight = true;
     [SerializeField] private Rigidbody2D rb;
-    // [SerializeField] private LayerMask groundLayer;
-    // [SerializeField] private LayerMask pushableLayer;
-    // [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer sr;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        transform.position = new Vector3(0.33f, 0.24f, 0.0f);
     }
 
     // Update is called once per frame
