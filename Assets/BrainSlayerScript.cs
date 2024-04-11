@@ -5,7 +5,7 @@ using UnityEngine;
 public class BrainSlayerScript : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] private Rigidbody2D playerRb;
+    private Rigidbody2D playerRb;
     [SerializeField] private Rigidbody2D brainSlayerRb;
     private float movementSpeed = .025f;
 
@@ -13,7 +13,7 @@ public class BrainSlayerScript : MonoBehaviour
 
     void Start()
     {
-        
+        playerRb = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
