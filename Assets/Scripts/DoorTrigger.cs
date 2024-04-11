@@ -34,13 +34,13 @@ public class DoorTrigger : MonoBehaviour
             Debug.Log("Player entered door!");
             switch(doorLocation) {
                 case DoorLocation.Top:
-                    player.transform.position = new Vector3(0.35f, -4.39f, 0f);
+                    player.transform.position = new Vector3(0.35f, -3.89f, 0f);
                     break;
                 case DoorLocation.Left:
                     player.transform.position = new Vector3(15.3f, 0f, 0f);
                     break;
                 case DoorLocation.Right: 
-                    player.transform.position = new Vector3(-14.65f, 0f, 0f);
+                    player.transform.position = new Vector3(-14.45f, 0f, 0f);
                     break;
                 case DoorLocation.Bottom: 
                     player.transform.position = new Vector3(0.35f, 4.93f, 0f);
@@ -50,6 +50,9 @@ public class DoorTrigger : MonoBehaviour
                     Debug.Log("Error, door location not set!");
                     break;
             }
+            GameObject targetObject = GameObject.Find("RoomController");
+            RoomController targetScript = targetObject.GetComponent<RoomController>();
+            targetScript.GenerateRoom(0);
         }
     }
 
