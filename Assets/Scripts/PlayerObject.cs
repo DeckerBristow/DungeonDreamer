@@ -12,6 +12,7 @@ public class PlayerObject : MonoBehaviour
     private bool isFacingRight = true;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private SpriteRenderer sr;
+    public Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,8 @@ public class PlayerObject : MonoBehaviour
     {
         horizontal = Input.GetAxis("Horizontal") * playerMoveSpeed;
         vertical = Input.GetAxis("Vertical") * playerMoveSpeed;
+
+        animator.SetFloat("Speed", Mathf.Max(Mathf.Abs(horizontal),Mathf.Abs(vertical)));
 
         // animator.SetFloat("PlayerSpeed", Mathf.Abs(horizontal) + Mathf.Abs(vertical));
 
