@@ -38,11 +38,11 @@ public class BrainSlayerScript : MonoBehaviour
 
 
         }
-        if (brainSlayerRb.transform.position.y > playerRb.transform.position.y){
+        if (brainSlayerRb.transform.position.y > (playerRb.transform.position.y-.5)){
             brainSlayerRb.transform.Translate(0, (-1*movementSpeed), 0);
 
         }
-        if (brainSlayerRb.transform.position.y < playerRb.transform.position.y){
+        if (brainSlayerRb.transform.position.y < playerRb.transform.position.y-.5){
             brainSlayerRb.transform.Translate(0, (movementSpeed), 0);
 
         }
