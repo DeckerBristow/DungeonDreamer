@@ -256,6 +256,7 @@ MonoBehaviour:
   rb: {fileID: 99293979}
   sr: {fileID: 99293977}
   animator: {fileID: 99293982}
+  brainSlayerAnimator: {fileID: 984137245}
   weaponCollider: {fileID: 99293984}
 --- !u!61 &99293981
 BoxCollider2D:
@@ -627,6 +628,11 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16751367, y: 0.22837098}
   m_EdgeRadius: 0
+--- !u!95 &984137245 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8906570858356981765, guid: d4ab59572c6b641c68162f351426151b, type: 3}
+  m_PrefabInstance: {fileID: 3305904068407605672}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1165442077
 PrefabInstance:
   m_ObjectHideFlags: 0

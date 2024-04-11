@@ -14,6 +14,8 @@ public class PlayerObject : MonoBehaviour
     [SerializeField] private SpriteRenderer sr;
     public Animator animator;
 
+    public Animator brainSlayerAnimator;
+
     public CapsuleCollider2D weaponCollider;
  
 
@@ -86,5 +88,18 @@ public class PlayerObject : MonoBehaviour
             weaponCollider.offset = offset;
         }
 
+    }
+
+    private void OnCollisionEnter2D(Collision2D other){
+        if(other.gameObject.CompareTag("BrainSlayer")){
+            foreach (ContactPoint2D contact in other.contacts)
+            {
+                if (contact.otherCollider == weaponCollider)
+                {
+                    brainSlayerAnimator.SetTrigger("Hit");
+                    break; // Stop checking after the first match
+                }
+            }
+        }
     }
 }
