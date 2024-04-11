@@ -14,6 +14,11 @@ public class PlayerObject : MonoBehaviour
     [SerializeField] private SpriteRenderer sr;
     public Animator animator;
 
+    public CapsuleCollider2D weaponCollider;
+ 
+
+    private float weaponSpeed = 0.005f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,5 +51,40 @@ public class PlayerObject : MonoBehaviour
     {
         rb.velocity = new Vector2(horizontal, vertical);
         sr.flipX = !isFacingRight;
+
+
+        if(animator.GetCurrentAnimatorStateInfo(0).IsName("Attack")){
+            Vector2 offset = weaponCollider.offset;
+
+            if (isFacingRight){
+                if(offset.x >=0){
+                    offset.x += weaponSpeed;
+                    offset.y += weaponSpeed/3;
+                }
+                else{
+                    offset.x *= -1;
+                    offset.x += weaponSpeed;
+                    offset.y += weaponSpeed/3;
+                }
+            }
+            else{
+                if(offset.x < 0){
+                    offset.x -= weaponSpeed;
+                    offset.y += weaponSpeed/3;
+                }
+                else{
+                    offset.x *= -1;
+                    offset.x -= weaponSpeed;
+                    offset.y += weaponSpeed/3;
+                }
+            }
+
+            if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1){
+                offset.x = 0;
+                offset.y = -.05f;
+            }
+            weaponCollider.offset = offset;
+        }
+
     }
 }
