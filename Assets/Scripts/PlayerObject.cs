@@ -17,7 +17,14 @@ public class PlayerObject : MonoBehaviour
     public Animator brainSlayerAnimator;
 
     public CapsuleCollider2D weaponCollider;
- 
+
+    public int health = 5;
+    private bool isInvincible = false;
+    private float invincibilityTimer = 0.0f;
+    private float invincibilityDuration = 1.0f; 
+    private float flashTimer = 0.05f;
+    private Color originalColor;
+    private Color invincibleColor = Color.red;
 
     private float weaponSpeed = 0.005f;
 
@@ -25,6 +32,7 @@ public class PlayerObject : MonoBehaviour
     void Start()
     {
         transform.position = new Vector3(0.33f, 0.24f, 0.0f);
+        originalColor = sr.color;
     }
 
     // Update is called once per frame
@@ -46,6 +54,22 @@ public class PlayerObject : MonoBehaviour
             // launch a melee attack in direction of mouse cursor
 
             // animator.Play("attack");
+        }
+        
+        if (isInvincible) {
+            Debug.Log("invincible!");
+            invincibilityTimer -= Time.deltaTime;
+            flashTimer -= Time.deltaTime;
+            if (invincibilityTimer <= 0) {
+                sr.enabled = true;
+                isInvincible = false;
+                flashTimer = 0.15f;
+                sr.color = originalColor;
+            }
+            else if (flashTimer <= 0) {
+                sr.enabled = !sr.enabled;
+                flashTimer = 0.15f;
+            }
         }
     }
 
@@ -92,14 +116,30 @@ public class PlayerObject : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.CompareTag("BrainSlayer")){
+            bool attack = false;
             foreach (ContactPoint2D contact in other.contacts)
             {
                 if (contact.otherCollider == weaponCollider)
                 {
                     brainSlayerAnimator.SetTrigger("Hit");
+                    attack = true;
                     break; // Stop checking after the first match
                 }
             }
+            if(!attack) {
+                Debug.Log("registered attack!");
+                if (!this.isInvincible) {
+                    OnHit();
+                }
+            }
         }
+    }
+
+    private void OnHit() {
+        Debug.Log("Got hit!");
+        this.health -= 1;
+        this.isInvincible = true;
+        this.invincibilityTimer = this.invincibilityDuration;
+        sr.color = invincibleColor;
     }
 }
