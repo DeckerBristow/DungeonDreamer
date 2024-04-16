@@ -27,22 +27,50 @@ public class RoomController : MonoBehaviour
         }
         Debug.Log("Generated new room: " + newSeed);
         this.seed = newSeed;
+        System.Random random = new System.Random(this.seed);
+        generateEnemies(ref random);
+        generateHealthPickups(ref random);
+    }
+
+    private void generateEnemies(ref System.Random random) {
         GameObject[] existingEnemies = GameObject.FindGameObjectsWithTag("BrainSlayer");
-        Debug.Log(existingEnemies);
         foreach (GameObject enemy in existingEnemies)
         {
             Destroy(enemy);
         }
-        System.Random random = new System.Random(this.seed);
         int enemies = random.Next(1, 5);
-        // int enemies = 1;
         for (int i = 0; i < enemies; i++) {
-        // Debug.Log(random.Next());
             float x = random.Next(-1465, 1530)/100.0f;
             float y = random.Next(-389, 483)/100.0f;
             GameObject enemyPrefab = Resources.Load<GameObject>("BrainSlayer");
             Instantiate(enemyPrefab, new Vector3(x, y, 0), Quaternion.identity);
         }
-        // GameObject.Find("BrainSlayer").transform.position = new Vector3(x, y, 0);
+    }
+
+    private void generateHealthPickups(ref System.Random random) {
+        GameObject[] existingPickups = GameObject.FindGameObjectsWithTag("HealthPickup");
+        foreach (GameObject pickup in existingPickups) {
+            Destroy(pickup);
+        }
+        int val = random.Next(1, 100);
+        int healthPickups = 0;
+        if(val == 100) {
+            healthPickups = 4;
+        }
+        else if (val > 92) {
+            healthPickups = 3;
+        }
+        else if (val > 75) {
+            healthPickups = 2;
+        }
+        else if (val > 55) {
+            healthPickups = 1;
+        }
+        for (int i = 0; i < healthPickups; i++) {
+            float x = random.Next(-1465, 1530)/100.0f;
+            float y = random.Next(-389, 483)/100.0f;
+            GameObject healthPrefab = Resources.Load<GameObject>("HealthPickup");
+            Instantiate(healthPrefab, new Vector3(x, y, 0), Quaternion.identity);
+        }
     }
 }

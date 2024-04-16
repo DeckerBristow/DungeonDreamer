@@ -57,7 +57,7 @@ public class PlayerObject : MonoBehaviour
         }
         
         if (isInvincible) {
-            Debug.Log("invincible!");
+            // Debug.Log("invincible!");
             invincibilityTimer -= Time.deltaTime;
             flashTimer -= Time.deltaTime;
             if (invincibilityTimer <= 0) {
@@ -127,7 +127,6 @@ public class PlayerObject : MonoBehaviour
                 }
             }
             if(!attack) {
-                Debug.Log("registered attack!");
                 if (!this.isInvincible) {
                     OnHit();
                 }
@@ -136,7 +135,7 @@ public class PlayerObject : MonoBehaviour
     }
 
     private void OnHit() {
-        Debug.Log("Got hit!");
+        // Debug.Log("Got hit!");
         this.health -= 1;
         this.isInvincible = true;
         this.invincibilityTimer = this.invincibilityDuration;
