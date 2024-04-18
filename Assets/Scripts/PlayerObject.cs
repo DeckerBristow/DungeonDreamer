@@ -14,9 +14,13 @@ public class PlayerObject : MonoBehaviour
     [SerializeField] private SpriteRenderer sr;
     public Animator animator;
 
-    public Animator brainSlayerAnimator;
+    
+
+    // public Animator brainSlayerAnimator;
 
     public CapsuleCollider2D weaponCollider;
+
+    public BoxCollider2D characterCollider;
 
     public int health = 5;
     private bool isInvincible = false;
@@ -49,12 +53,7 @@ public class PlayerObject : MonoBehaviour
             isFacingRight = !isFacingRight;
         }
 
-        if (Input.GetButtonDown("Fire1"))
-        {
-            // launch a melee attack in direction of mouse cursor
-
-            // animator.Play("attack");
-        }
+        
         
         if (isInvincible) {
             // Debug.Log("invincible!");
@@ -116,21 +115,38 @@ public class PlayerObject : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.CompareTag("BrainSlayer")){
+            Animator brainSlayerAnimator = other.gameObject.GetComponent<Animator>();
+            BrainSlayerScript brainSlayerScript = other.gameObject.GetComponent<BrainSlayerScript>();
+            //BrainSlayerLives = brainSlayerScript.Lives;
             bool attack = false;
             foreach (ContactPoint2D contact in other.contacts)
             {
                 if (contact.otherCollider == weaponCollider)
                 {
-                    brainSlayerAnimator.SetTrigger("Hit");
-                    attack = true;
+                    if (brainSlayerScript.Lives > 0){
+                        brainSlayerAnimator.SetTrigger("Hit");
+                        attack = true;
+
+                    } else if (brainSlayerAnimator.GetBool("alive")){
+                        brainSlayerAnimator.SetBool("alive", false);
+                        brainSlayerAnimator.SetTrigger("Death");
+                        if(brainSlayerAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1){
+                            
+                        }
+                    }
+
+                    brainSlayerScript.Lives -=1;
+                    
                     break; // Stop checking after the first match
                 }
+                if (contact.otherCollider == characterCollider)
+                    if(!attack) {
+                        if (!this.isInvincible) {
+                            OnHit();
+                        }
             }
-            if(!attack) {
-                if (!this.isInvincible) {
-                    OnHit();
-                }
             }
+            
         }
     }
 

@@ -9,6 +9,7 @@ public class BrainSlayerScript : MonoBehaviour
     [SerializeField] private Rigidbody2D brainSlayerRb;
     private float movementSpeed = .025f;
 
+    public int Lives = 3;
     public Animator animator;
 
     void Start()
@@ -24,30 +25,36 @@ public class BrainSlayerScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (brainSlayerRb.transform.position.x > playerRb.transform.position.x){
-            brainSlayerRb.transform.Translate((-1*movementSpeed), 0, 0);
-            animator.SetBool("isWalkingLeft", true);
-            animator.SetBool("isWalkingRight", false);
-            
+        if(animator.GetBool("alive")){
+            if (brainSlayerRb.transform.position.x > playerRb.transform.position.x){
+                brainSlayerRb.transform.Translate((-1*movementSpeed), 0, 0);
+                animator.SetBool("isWalkingLeft", true);
+                animator.SetBool("isWalkingRight", false);
+                
 
-        }
-        if (brainSlayerRb.transform.position.x < playerRb.transform.position.x){
-            brainSlayerRb.transform.Translate((movementSpeed), 0, 0);
-            animator.SetBool("isWalkingRight", true);
-            animator.SetBool("isWalkingLeft", false);
+            }
+            if (brainSlayerRb.transform.position.x < playerRb.transform.position.x){
+                brainSlayerRb.transform.Translate((movementSpeed), 0, 0);
+                animator.SetBool("isWalkingRight", true);
+                animator.SetBool("isWalkingLeft", false);
 
 
-        }
-        if (brainSlayerRb.transform.position.y > (playerRb.transform.position.y-.5)){
-            brainSlayerRb.transform.Translate(0, (-1*movementSpeed), 0);
+            }
+            if (brainSlayerRb.transform.position.y > (playerRb.transform.position.y-.5)){
+                brainSlayerRb.transform.Translate(0, (-1*movementSpeed), 0);
 
-        }
-        if (brainSlayerRb.transform.position.y < playerRb.transform.position.y-.5){
-            brainSlayerRb.transform.Translate(0, (movementSpeed), 0);
+            }
+            if (brainSlayerRb.transform.position.y < playerRb.transform.position.y-.5){
+                brainSlayerRb.transform.Translate(0, (movementSpeed), 0);
 
+            }
         }
         
 
-
+    }
+    public void DestroyEnemy()
+    {
+        Debug.Log("Should destroy");
+        Destroy(gameObject);
     }
 }
