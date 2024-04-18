@@ -9,7 +9,7 @@ public class BrainSlayerScript : MonoBehaviour
     [SerializeField] private Rigidbody2D brainSlayerRb;
     private float movementSpeed = .025f;
 
-    public int Lives = 3;
+    public int Health = 10;
     public Animator animator;
 
     void Start()

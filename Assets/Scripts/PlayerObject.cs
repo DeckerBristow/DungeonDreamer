@@ -14,6 +14,7 @@ public class PlayerObject : MonoBehaviour
     [SerializeField] private SpriteRenderer sr;
     public Animator animator;
 
+    public int meleDamage = 3;
     
 
     // public Animator brainSlayerAnimator;
@@ -117,13 +118,12 @@ public class PlayerObject : MonoBehaviour
         if(other.gameObject.CompareTag("BrainSlayer")){
             Animator brainSlayerAnimator = other.gameObject.GetComponent<Animator>();
             BrainSlayerScript brainSlayerScript = other.gameObject.GetComponent<BrainSlayerScript>();
-            //BrainSlayerLives = brainSlayerScript.Lives;
             bool attack = false;
             foreach (ContactPoint2D contact in other.contacts)
             {
                 if (contact.otherCollider == weaponCollider)
                 {
-                    if (brainSlayerScript.Lives > 0){
+                    if (brainSlayerScript.Health > meleDamage){
                         brainSlayerAnimator.SetTrigger("Hit");
                         attack = true;
 
@@ -135,11 +135,11 @@ public class PlayerObject : MonoBehaviour
                         }
                     }
 
-                    brainSlayerScript.Lives -=1;
+                    brainSlayerScript.Health -= meleDamage;
                     
                     break; // Stop checking after the first match
                 }
-                if (contact.otherCollider == characterCollider)
+                if (contact.otherCollider == characterCollider && brainSlayerAnimator.GetBool("alive"))
                     if(!attack) {
                         if (!this.isInvincible) {
                             OnHit();
