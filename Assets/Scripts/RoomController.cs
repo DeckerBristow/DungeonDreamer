@@ -40,7 +40,7 @@ public class RoomController : MonoBehaviour
         }
         int enemies = random.Next(1, 5);
         for (int i = 0; i < enemies; i++) {
-            float x = random.Next(-1465, 1530)/100.0f;
+            float x = random.Next(-1100, 1100)/100.0f;
             float y = random.Next(-389, 483)/100.0f;
             GameObject enemyPrefab = Resources.Load<GameObject>("BrainSlayer");
             Instantiate(enemyPrefab, new Vector3(x, y, 0), Quaternion.identity);
@@ -67,7 +67,7 @@ public class RoomController : MonoBehaviour
             healthPickups = 1;
         }
         for (int i = 0; i < healthPickups; i++) {
-            float x = random.Next(-1465, 1530)/100.0f;
+            float x = random.Next(-1100, 1100)/100.0f;
             float y = random.Next(-389, 483)/100.0f;
             GameObject healthPrefab = Resources.Load<GameObject>("HealthPickup");
             Instantiate(healthPrefab, new Vector3(x, y, 0), Quaternion.identity);
