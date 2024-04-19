@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class HealthPickup : MonoBehaviour
 {
-    [SerializeField] private PlayerObject player;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +20,7 @@ public class HealthPickup : MonoBehaviour
     {
         if (other.CompareTag("Player")) 
         {
+            PlayerObject player = other.gameObject.GetComponent<PlayerObject>();
             if(player.health < 5) {
                 player.health += 1;
                 Destroy(gameObject);
