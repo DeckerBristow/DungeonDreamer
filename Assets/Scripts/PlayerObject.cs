@@ -22,6 +22,7 @@ public class PlayerObject : MonoBehaviour
     public BoxCollider2D characterCollider;
 
     public int health = 5;
+    public int gems = 0;
     private bool isInvincible = false;
     private float invincibilityTimer = 0.0f;
     private float invincibilityDuration = 1.0f; 

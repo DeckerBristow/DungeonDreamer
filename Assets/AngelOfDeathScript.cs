@@ -58,7 +58,7 @@ public class AngelOfDeathScript : MonoBehaviour
                 targetPosition = playerRb.transform.position;
                 isMoving = true;
                 animator.SetBool("isFlying", true);
-            } else if (distance < 3 && animator.GetBool("alive"))
+            } else if (distance < 5 && animator.GetBool("alive"))
         {
             // Follow the player slowly
             float step = followSpeed * Time.deltaTime;
@@ -102,6 +102,10 @@ public class AngelOfDeathScript : MonoBehaviour
     public void Died()
     {
         boxCollider.enabled = false;
+        float x = gameObject.transform.position.x;
+        float y = gameObject.transform.position.y;
+        GameObject gem = Resources.Load<GameObject>("Gem");
+        Instantiate(gem, new Vector3(x, y, 0), Quaternion.identity);
     }
 }
 

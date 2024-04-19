@@ -58,11 +58,19 @@ public class BrainSlayerScript : MonoBehaviour
     }
     public void DestroyEnemy()
     {
+
         Destroy(gameObject);
+        
     }
 
     public void Died()
     {
+
         boxCollider.enabled = false;
+
+        float x = gameObject.transform.position.x;
+        float y = gameObject.transform.position.y;
+        GameObject gem = Resources.Load<GameObject>("Gem");
+        Instantiate(gem, new Vector3(x, y, 0), Quaternion.identity);
     }
 }
