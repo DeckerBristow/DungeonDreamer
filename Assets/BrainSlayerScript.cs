@@ -7,7 +7,10 @@ public class BrainSlayerScript : MonoBehaviour
     // Start is called before the first frame update
     private Rigidbody2D playerRb;
     [SerializeField] private Rigidbody2D brainSlayerRb;
+    public GameObject gameObjectWithCollider;
     private float movementSpeed = .025f;
+
+    private BoxCollider2D boxCollider;
 
     public int Health = 10;
     public Animator animator;
@@ -15,6 +18,7 @@ public class BrainSlayerScript : MonoBehaviour
     void Start()
     {
         playerRb = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -54,7 +58,11 @@ public class BrainSlayerScript : MonoBehaviour
     }
     public void DestroyEnemy()
     {
-        Debug.Log("Should destroy");
         Destroy(gameObject);
+    }
+
+    public void Died()
+    {
+        boxCollider.enabled = false;
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerObject : MonoBehaviour
 {
     
-    public float playerMoveSpeed = 6.0f;
+    private float playerMoveSpeed = 3.5f;
 
     private float horizontal = 0.0f;
     private float vertical = 0.0f;
@@ -127,10 +127,9 @@ public class PlayerObject : MonoBehaviour
 
                     } else if (brainSlayerAnimator.GetBool("alive")){
                         brainSlayerAnimator.SetBool("alive", false);
+                        other.collider.enabled = false;
                         brainSlayerAnimator.SetTrigger("Death");
-                        if(brainSlayerAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1){
-                            
-                        }
+                        
                     }
 
                     brainSlayerScript.Health -= meleDamage;
@@ -140,17 +139,56 @@ public class PlayerObject : MonoBehaviour
                 if (contact.otherCollider == characterCollider && brainSlayerAnimator.GetBool("alive"))
                     if(!attack) {
                         if (!this.isInvincible) {
-                            OnHit();
+                            OnHit(1);
                         }
             }
             }
             
         }
+
+
+
+
+        if(other.gameObject.CompareTag("AngelOfDeath")){
+            Animator angelOfDeathAnimator = other.gameObject.GetComponent<Animator>();
+            AngelOfDeathScript angelOfDeathScript = other.gameObject.GetComponent<AngelOfDeathScript>();
+            bool attack = false;
+            foreach (ContactPoint2D contact in other.contacts)
+            {
+                if (contact.otherCollider == weaponCollider && angelOfDeathAnimator.GetBool("alive"))
+                {
+                    if (angelOfDeathScript.Health > meleDamage){
+                        angelOfDeathAnimator.SetTrigger("Hit");
+                        attack = true;
+
+                    } else if (angelOfDeathAnimator.GetBool("alive")){
+                        angelOfDeathAnimator.SetBool("alive", false);
+                        
+                        angelOfDeathAnimator.SetTrigger("Death");
+                        
+                    }
+
+                    angelOfDeathScript.Health -= meleDamage;
+                    
+                    break; // Stop checking after the first match
+                }
+                if (contact.otherCollider == characterCollider && angelOfDeathAnimator.GetBool("alive"))
+                    if(!attack) {
+                        if (!this.isInvincible) {
+                            OnHit(2);
+                        }
+            }
+            }
+            
+        }
+
+
+
     }
 
-    private void OnHit() {
+    private void OnHit(int damage) {
         // Debug.Log("Got hit!");
-        this.health -= 1;
+        this.health -= damage;
         this.isInvincible = true;
         this.invincibilityTimer = this.invincibilityDuration;
         sr.color = invincibleColor;
