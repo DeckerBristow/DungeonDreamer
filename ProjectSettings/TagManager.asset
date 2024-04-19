@@ -6,6 +6,7 @@ TagManager:
   tags:
   - BrainSlayer
   - HealthPickup
+  - Enemy
   layers:
   - Default
   - TransparentFX

@@ -620,7 +620,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0014385283, y: 0.032724626}
+  m_Offset: {x: -0.0014385283, y: -0.007583108}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -631,7 +631,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.16751367, y: 0.22837098}
+  m_Size: {x: 0.16751367, y: 0.1477555}
   m_EdgeRadius: 0
 --- !u!1 &1032339859 stripped
 GameObject:
@@ -6126,6 +6126,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3533383942830172671, guid: d4ab59572c6b641c68162f351426151b, type: 3}
+      propertyPath: m_Size.y
+      value: 0.14775547
+      objectReference: {fileID: 0}
+    - target: {fileID: 3533383942830172671, guid: d4ab59572c6b641c68162f351426151b, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.0075831227
+      objectReference: {fileID: 0}
     - target: {fileID: 5567819594627548807, guid: d4ab59572c6b641c68162f351426151b, type: 3}
       propertyPath: m_Name
       value: BrainSlayer
@@ -6336,13 +6344,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 38894658870357321, guid: 571f2123ae48e4b938f483ed39e77343, type: 3}
+      propertyPath: fireBall
+      value: 
+      objectReference: {fileID: 1032339859}
     - target: {fileID: 2883969994002776301, guid: 571f2123ae48e4b938f483ed39e77343, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.77
+      value: 3.4
       objectReference: {fileID: 0}
     - target: {fileID: 2883969994002776301, guid: 571f2123ae48e4b938f483ed39e77343, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7
+      value: -11.34
       objectReference: {fileID: 0}
     - target: {fileID: 2883969994002776301, guid: 571f2123ae48e4b938f483ed39e77343, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6379,6 +6391,10 @@ PrefabInstance:
     - target: {fileID: 3055885322787246900, guid: 571f2123ae48e4b938f483ed39e77343, type: 3}
       propertyPath: m_Name
       value: FireBall
+      objectReference: {fileID: 0}
+    - target: {fileID: 3055885322787246900, guid: 571f2123ae48e4b938f483ed39e77343, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3666448658534499768, guid: 571f2123ae48e4b938f483ed39e77343, type: 3}
       propertyPath: m_ExcludeLayers.m_Bits

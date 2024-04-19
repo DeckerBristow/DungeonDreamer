@@ -17,8 +17,6 @@ public class PlayerObject : MonoBehaviour
     public int meleDamage = 3;
     
 
-    // public Animator brainSlayerAnimator;
-
     public CapsuleCollider2D weaponCollider;
 
     public BoxCollider2D characterCollider;
