@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerObject : MonoBehaviour
 {
     
-    public float playerMoveSpeed = 6.0f;
+    private float playerMoveSpeed = 3.5f;
 
     private float horizontal = 0.0f;
     private float vertical = 0.0f;
@@ -14,9 +14,12 @@ public class PlayerObject : MonoBehaviour
     [SerializeField] private SpriteRenderer sr;
     public Animator animator;
 
-    public Animator brainSlayerAnimator;
+    public int meleeDamage = 3;
+    
 
     public CapsuleCollider2D weaponCollider;
+
+    public BoxCollider2D characterCollider;
 
     public int health = 5;
     private bool isInvincible = false;
@@ -49,12 +52,7 @@ public class PlayerObject : MonoBehaviour
             isFacingRight = !isFacingRight;
         }
 
-        if (Input.GetButtonDown("Fire1"))
-        {
-            // launch a melee attack in direction of mouse cursor
-
-            // animator.Play("attack");
-        }
+        
         
         if (isInvincible) {
             // Debug.Log("invincible!");
@@ -116,27 +114,81 @@ public class PlayerObject : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.CompareTag("BrainSlayer")){
+            Animator brainSlayerAnimator = other.gameObject.GetComponent<Animator>();
+            BrainSlayerScript brainSlayerScript = other.gameObject.GetComponent<BrainSlayerScript>();
             bool attack = false;
             foreach (ContactPoint2D contact in other.contacts)
             {
                 if (contact.otherCollider == weaponCollider)
                 {
-                    brainSlayerAnimator.SetTrigger("Hit");
-                    attack = true;
+                    if (brainSlayerScript.Health > meleeDamage){
+                        brainSlayerAnimator.SetTrigger("Hit");
+                        attack = true;
+
+                    } else if (brainSlayerAnimator.GetBool("alive")){
+                        brainSlayerAnimator.SetBool("alive", false);
+                        other.collider.enabled = false;
+                        brainSlayerAnimator.SetTrigger("Death");
+                        
+                    }
+
+                    brainSlayerScript.Health -= meleeDamage;
+                    
                     break; // Stop checking after the first match
                 }
+                if (contact.otherCollider == characterCollider && brainSlayerAnimator.GetBool("alive"))
+                    if(!attack) {
+                        if (!this.isInvincible) {
+                            OnHit(1);
+                        }
             }
-            if(!attack) {
-                if (!this.isInvincible) {
-                    OnHit();
-                }
             }
+            
         }
+
+
+
+
+        if(other.gameObject.CompareTag("AngelOfDeath")){
+            Animator angelOfDeathAnimator = other.gameObject.GetComponent<Animator>();
+            AngelOfDeathScript angelOfDeathScript = other.gameObject.GetComponent<AngelOfDeathScript>();
+            bool attack = false;
+            foreach (ContactPoint2D contact in other.contacts)
+            {
+                if (contact.otherCollider == weaponCollider && angelOfDeathAnimator.GetBool("alive"))
+                {
+                    if (angelOfDeathScript.Health > meleeDamage){
+                        angelOfDeathAnimator.SetTrigger("Hit");
+                        attack = true;
+
+                    } else if (angelOfDeathAnimator.GetBool("alive")){
+                        angelOfDeathAnimator.SetBool("alive", false);
+                        
+                        angelOfDeathAnimator.SetTrigger("Death");
+                        
+                    }
+
+                    angelOfDeathScript.Health -= meleeDamage;
+                    
+                    break; // Stop checking after the first match
+                }
+                if (contact.otherCollider == characterCollider && angelOfDeathAnimator.GetBool("alive"))
+                    if(!attack) {
+                        if (!this.isInvincible) {
+                            OnHit(2);
+                        }
+            }
+            }
+            
+        }
+
+
+
     }
 
-    private void OnHit() {
+    private void OnHit(int damage) {
         // Debug.Log("Got hit!");
-        this.health -= 1;
+        this.health -= damage;
         this.isInvincible = true;
         this.invincibilityTimer = this.invincibilityDuration;
         sr.color = invincibleColor;
