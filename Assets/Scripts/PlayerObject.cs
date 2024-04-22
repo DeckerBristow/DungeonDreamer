@@ -14,7 +14,7 @@ public class PlayerObject : MonoBehaviour
     [SerializeField] private SpriteRenderer sr;
     public Animator animator;
 
-    public int meleeDamage = 3;
+    public int meleDamage = 3;
     
 
     public CapsuleCollider2D weaponCollider;
@@ -22,6 +22,7 @@ public class PlayerObject : MonoBehaviour
     public BoxCollider2D characterCollider;
 
     public int health = 5;
+    public int gems = 0;
     private bool isInvincible = false;
     private float invincibilityTimer = 0.0f;
     private float invincibilityDuration = 1.0f; 
@@ -121,7 +122,7 @@ public class PlayerObject : MonoBehaviour
             {
                 if (contact.otherCollider == weaponCollider)
                 {
-                    if (brainSlayerScript.Health > meleeDamage){
+                    if (brainSlayerScript.Health > meleDamage){
                         brainSlayerAnimator.SetTrigger("Hit");
                         attack = true;
 
@@ -132,7 +133,7 @@ public class PlayerObject : MonoBehaviour
                         
                     }
 
-                    brainSlayerScript.Health -= meleeDamage;
+                    brainSlayerScript.Health -= meleDamage;
                     
                     break; // Stop checking after the first match
                 }
@@ -157,7 +158,7 @@ public class PlayerObject : MonoBehaviour
             {
                 if (contact.otherCollider == weaponCollider && angelOfDeathAnimator.GetBool("alive"))
                 {
-                    if (angelOfDeathScript.Health > meleeDamage){
+                    if (angelOfDeathScript.Health > meleDamage){
                         angelOfDeathAnimator.SetTrigger("Hit");
                         attack = true;
 
@@ -168,7 +169,7 @@ public class PlayerObject : MonoBehaviour
                         
                     }
 
-                    angelOfDeathScript.Health -= meleeDamage;
+                    angelOfDeathScript.Health -= meleDamage;
                     
                     break; // Stop checking after the first match
                 }

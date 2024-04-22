@@ -8,7 +8,7 @@ TagManager:
   - HealthPickup
   - Enemy
   - AngelOfDeath
-  - Shop
+  - ScoreTag
   layers:
   - Default
   - TransparentFX
@@ -17,7 +17,7 @@ TagManager:
   - Water
   - UI
   - Player
-  - 
+  - Enemy
   - 
   - 
   - 

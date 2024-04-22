@@ -37,10 +37,10 @@ public class DoorTrigger : MonoBehaviour
                     player.transform.position = new Vector3(0.35f, -3.89f, 0f);
                     break;
                 case DoorLocation.Left:
-                    player.transform.position = new Vector3(15.3f, 0f, 0f);
+                    player.transform.position = new Vector3(11.3f, 0f, 0f);
                     break;
                 case DoorLocation.Right: 
-                    player.transform.position = new Vector3(-14.45f, 0f, 0f);
+                    player.transform.position = new Vector3(-10.45f, 0f, 0f);
                     break;
                 case DoorLocation.Bottom: 
                     player.transform.position = new Vector3(0.35f, 4.93f, 0f);

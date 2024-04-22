@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
-public class HealthPickup : MonoBehaviour
+public class GemScript : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -21,10 +22,13 @@ public class HealthPickup : MonoBehaviour
         if (other.CompareTag("Player")) 
         {
             PlayerObject player = other.gameObject.GetComponent<PlayerObject>();
-            if(player.health < 5) {
-                player.health += 1;
-                Destroy(gameObject);
-            }
+            
+            player.gems += 1;
+            GameObject textObject = GameObject.FindGameObjectWithTag("ScoreTag");
+            TextMeshProUGUI textMesh = textObject.GetComponent<TextMeshProUGUI>();
+            textMesh.text = ""+player.gems;
+            Destroy(gameObject);
+        
         }
     }
 }
