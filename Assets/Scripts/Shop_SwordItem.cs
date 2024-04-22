@@ -23,13 +23,13 @@ public class Shop_SwordItem : MonoBehaviour
         // 1. reduce gold
 
         // 2. increase damage (THIS IS A REALLY DUMB WAY TO DO THIS AND NOT SCALABLE AT ALL BUT IT WILL WORK)
-        Debug.Log(player.meleeDamage);
+        Debug.Log(player.meleDamage);
         Debug.Log(meleeLevels);
-        int currentLevel = Array.IndexOf(meleeLevels, player.meleeDamage);
+        int currentLevel = Array.IndexOf(meleeLevels, player.meleDamage);
         if (currentLevel < 4) {
             currentLevel++;
         }
-        player.meleeDamage = meleeLevels[currentLevel];
-        Debug.Log("current melee damage: " + player.meleeDamage);
+        player.meleDamage = meleeLevels[currentLevel];
+        Debug.Log("current melee damage: " + player.meleDamage);
     }
 }
