@@ -9,6 +9,7 @@ public class HeartController : MonoBehaviour
     public Sprite fullHeart; // Full heart sprite
     public Sprite emptyHeart; // Empty heart sprite
     public Image heartPrefab; // Reference to the heart image prefab
+    public GameObject shopMenuUI;
     private Image[] hearts; // Array to store heart Image components
 
     void Start()
@@ -38,5 +39,9 @@ public class HeartController : MonoBehaviour
         {
             hearts[i].sprite = i < currentHealth ? fullHeart : emptyHeart;
         }
+    }
+
+    public GameObject GetShopUI() {
+        return shopMenuUI;
     }
 }

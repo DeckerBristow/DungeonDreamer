@@ -30,6 +30,7 @@ public class RoomController : MonoBehaviour
         System.Random random = new System.Random(this.seed);
         generateEnemies(ref random);
         generateHealthPickups(ref random);
+        generateShop(ref random);
     }
 
     private void generateEnemies(ref System.Random random) {
@@ -71,6 +72,19 @@ public class RoomController : MonoBehaviour
             float y = random.Next(-389, 483)/100.0f;
             GameObject healthPrefab = Resources.Load<GameObject>("HealthPickup");
             Instantiate(healthPrefab, new Vector3(x, y, 0), Quaternion.identity);
+        }
+    }
+
+    private void generateShop(ref System.Random random) {
+        GameObject[] existingShops = GameObject.FindGameObjectsWithTag("Shop");
+        foreach (GameObject shop in existingShops) {
+            Destroy(shop);
+        }
+        if (random.Next(1, 100) > 80) {
+            float x = random.Next(-1100, 1100)/100.0f;
+            float y = random.Next(-389, 483)/100.0f;
+            GameObject shopPrefab = Resources.Load<GameObject>("Shop");
+            Instantiate(shopPrefab, new Vector3(x, y, 0), Quaternion.identity);
         }
     }
 }
