@@ -5722,6 +5722,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shopPanel: {fileID: 1577729759}
+  shopPhysical: {fileID: 1858607437}
   itemPositions:
   - {fileID: 3210618151293143924}
   - {fileID: 3238973976193669356}
@@ -6136,6 +6137,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1771446663}
   m_CullTransparentMesh: 1
+--- !u!1 &1858607437 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 134432278518967486, guid: 62a7561775e7b6d4ea90a7e88198a5fa, type: 3}
+  m_PrefabInstance: {fileID: 6984882289783307099}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &361406568385546513
 PrefabInstance:
   m_ObjectHideFlags: 0
