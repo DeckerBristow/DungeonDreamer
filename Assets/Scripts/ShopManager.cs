@@ -23,6 +23,7 @@ public class ShopManager : MonoBehaviour
     void Start()
     {
         shopPanel.SetActive(false);
+        shopPanel.transform.SetAsLastSibling();
         InitializeShopItems();
     }
     
