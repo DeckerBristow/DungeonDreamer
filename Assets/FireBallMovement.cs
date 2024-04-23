@@ -5,24 +5,27 @@ using UnityEngine;
 public class FireBallMovement : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float speed = 5f;
+    // public float speed = 5f;
     private Vector2 movementDirection;
     public GameObject fireBall;
-    public int fireBallDamage = 2;
+    public PlayerObject player;
+    int fireBallDamage;
+    int speed;
     
     public void SetDirection(Vector2 direction) {
         movementDirection = direction.normalized;
     }
     void Start()
     {
+        fireBallDamage = player.rangedDamage;
+        speed = player.rangedSpeed;
         fireBall.SetActive(true);
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(movementDirection * speed * Time.deltaTime);
+        transform.Translate(movementDirection * (float)speed * Time.deltaTime);
         
     }
 

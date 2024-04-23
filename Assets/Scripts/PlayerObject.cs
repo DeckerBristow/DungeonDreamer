@@ -15,6 +15,8 @@ public class PlayerObject : MonoBehaviour
     public Animator animator;
 
     public int meleDamage = 3;
+    public int rangedDamage = 2;
+    public int rangedSpeed = 5;
     
 
     public CapsuleCollider2D weaponCollider;
@@ -37,6 +39,8 @@ public class PlayerObject : MonoBehaviour
     {
         transform.position = new Vector3(0.33f, 0.24f, 0.0f);
         originalColor = sr.color;
+        // gems = 100;
+        Debug.Log(gems);
     }
 
     // Update is called once per frame

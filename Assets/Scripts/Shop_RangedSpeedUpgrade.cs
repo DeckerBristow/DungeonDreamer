@@ -5,10 +5,10 @@ using UnityEngine.UI;
 using System;
 using TMPro;
 
-public class Shop_SwordItem : MonoBehaviour
+public class Shop_RangedSpeedUpgrade : MonoBehaviour
 {
     private PlayerObject player;
-    public int[] meleeLevels = new int[] { 3, 5, 8, 13, 21 };
+    private int[] rangedSpeeds = new int[] { 5, 10, 15, 20, 25 };
     private Button buyButton; 
     private Color notPurchasableColor = new Color(0.33f, 0.33f, 0.33f);
     // Start is called before the first frame update
@@ -26,16 +26,26 @@ public class Shop_SwordItem : MonoBehaviour
     }
 
     private void UpdateButtonColor() {
-        if (player.gems < 20 || player.meleDamage == 21) {
+        if (player.gems < 20 || player.rangedSpeed == 25) {
+            if(buyButton == null) {
+                buyButton = transform.Find("Button").GetComponent<Button>();
+            }
             buyButton.interactable = false;
             buyButton.image.color = notPurchasableColor;
         } else {
+            if(buyButton == null) {
+                buyButton = transform.Find("Button").GetComponent<Button>();
+            }
             buyButton.interactable = true;
             buyButton.image.color = Color.white;
         }
     }
 
     public void onBuy() {
+        if(player == null) {
+            player = GameObject.FindWithTag("Player").GetComponent<PlayerObject>();
+        }
+        Debug.Log(player);
         // 1. reduce gold
         Debug.Log(player.gems);
         if(player.gems >= 20) {
@@ -46,11 +56,16 @@ public class Shop_SwordItem : MonoBehaviour
             textMesh.text = ""+player.gems;
             UpdateButtonColor();
             // 2. increase damage 
-            int currentLevel = Array.IndexOf(meleeLevels, player.meleDamage);
+            Debug.Log("current ranged speed: " + player.rangedSpeed);
+            int currentLevel = Array.IndexOf(rangedSpeeds, player.rangedSpeed);
+            Debug.Log("old level: " + currentLevel);
             if (currentLevel < 4) {
                 currentLevel++;
             }
-            player.meleDamage = meleeLevels[currentLevel];
+            Debug.Log("new level: " + currentLevel);
+            Debug.Log("ranged speed to set to: " + rangedSpeeds[currentLevel]);
+            player.rangedSpeed = rangedSpeeds[currentLevel];
+            Debug.Log("new ranged speed: " + player.rangedSpeed);
         }
     }
 }

@@ -9,6 +9,8 @@ TagManager:
   - Enemy
   - AngelOfDeath
   - ScoreTag
+  - Shop
+  - ShopItem
   layers:
   - Default
   - TransparentFX
