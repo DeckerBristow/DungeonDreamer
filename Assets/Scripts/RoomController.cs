@@ -88,4 +88,8 @@ public class RoomController : MonoBehaviour
             shopDisplay.GetComponent<ShopManager>().generateShopItems(ref random);
         }
     }
+
+    public int GetSeed(){
+        return seed;
+    }
 }
