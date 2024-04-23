@@ -8,6 +8,7 @@ public class RoomController : MonoBehaviour
 {
     private int seed;
     public GameObject enemyPrefab;
+    public GameObject shopDisplay;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +22,6 @@ public class RoomController : MonoBehaviour
     }
 
     public void GenerateRoom(int newSeed) {
-
         if (newSeed == 0) {
             newSeed = UnityEngine.Random.Range(1,MaxValue);
         }
@@ -85,6 +85,7 @@ public class RoomController : MonoBehaviour
             float y = random.Next(-389, 483)/100.0f;
             GameObject shopPrefab = Resources.Load<GameObject>("Shop");
             Instantiate(shopPrefab, new Vector3(x, y, 0), Quaternion.identity);
+            shopDisplay.GetComponent<ShopManager>().generateShopItems(ref random);
         }
     }
 }
