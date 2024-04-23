@@ -20,7 +20,7 @@ public class PlayerObject : MonoBehaviour
     public int rangedDamage = 2;
     public int rangedSpeed = 5;
     
-    public int numberOfDreamCatchers = 3;
+    public int numberOfDreamCatchers = 0;
 
 
     public CapsuleCollider2D weaponCollider;

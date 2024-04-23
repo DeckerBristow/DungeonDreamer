@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UI;  
+using System;
 using TMPro;
 
-public class Shop_HealthItem : MonoBehaviour
+public class Shop_DreamCatcher : MonoBehaviour
 {
     private PlayerObject player;
     private Button buyButton; 
@@ -24,7 +25,7 @@ public class Shop_HealthItem : MonoBehaviour
     }
 
     private void UpdateButtonColor() {
-        if (player.gems < 5 || player.health == 5) {
+        if (player.gems < 15 || player.numberOfDreamCatchers == 5) {
             if(buyButton == null) {
                 buyButton = transform.Find("Button").GetComponent<Button>();
             }
@@ -43,15 +44,17 @@ public class Shop_HealthItem : MonoBehaviour
         if(player == null) {
             player = GameObject.FindWithTag("Player").GetComponent<PlayerObject>();
         }
+        Debug.Log(player);
         // 1. reduce gold
-        if(player.gems >= 5 && player.health < 5) {
-            player.gems -= 5;
+        if(player.gems >= 15 && player.numberOfDreamCatchers < 5) {
+            player.gems -= 15;
+            Debug.Log(player.gems);
             GameObject textObject = GameObject.FindGameObjectWithTag("ScoreTag");
             TextMeshProUGUI textMesh = textObject.GetComponent<TextMeshProUGUI>();
             textMesh.text = ""+player.gems;
             UpdateButtonColor();
-            // 2. add heart
-            player.health += 1;
+            // 2. increase dream catchers
+            player.numberOfDreamCatchers++;
         }
     }
 }
