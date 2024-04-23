@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerObject : MonoBehaviour
 {
     
-    public float playerMoveSpeed = 6.0f;
+    private float playerMoveSpeed = 3.5f;
 
     private float horizontal = 0.0f;
     private float vertical = 0.0f;
@@ -14,15 +14,21 @@ public class PlayerObject : MonoBehaviour
     [SerializeField] private SpriteRenderer sr;
     public Animator animator;
 
-    
+    public List<int> savedRooms = new List<int>(5);
 
-    // public Animator brainSlayerAnimator;
+    public int meleDamage = 3;
+    public int rangedDamage = 2;
+    public int rangedSpeed = 5;
+    
+    public int numberOfDreamCatchers = 3;
+
 
     public CapsuleCollider2D weaponCollider;
 
     public BoxCollider2D characterCollider;
 
     public int health = 5;
+    public int gems = 0;
     private bool isInvincible = false;
     private float invincibilityTimer = 0.0f;
     private float invincibilityDuration = 1.0f; 
@@ -37,6 +43,12 @@ public class PlayerObject : MonoBehaviour
     {
         transform.position = new Vector3(0.33f, 0.24f, 0.0f);
         originalColor = sr.color;
+        // gems = 100;
+        Debug.Log(gems);
+        for (int i = 0; i < 5; i++)
+        {
+            savedRooms.Add(0); // Replace 0 with the default value you want
+        }
     }
 
     // Update is called once per frame
@@ -70,6 +82,52 @@ public class PlayerObject : MonoBehaviour
                 flashTimer = 0.15f;
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            
+            if(savedRooms[0] == 0){
+                SaveRoom(0);
+            }else{
+                teleportToRoom(savedRooms[0]);
+            }
+            
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+    
+            if(savedRooms[1] == 0){
+                SaveRoom(1);
+            }else{
+                teleportToRoom(savedRooms[1]);
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            
+            if(savedRooms[2] == 0){
+                SaveRoom(2);
+            }else{
+                teleportToRoom(savedRooms[2]);
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            if(savedRooms[3] == 0){
+                SaveRoom(3);
+            }else{
+                teleportToRoom(savedRooms[3]);
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+           if(savedRooms[4] == 0){
+                SaveRoom(4);
+            }else{
+                teleportToRoom(savedRooms[4]);
+            }
+        }
+
     }
 
     private void FixedUpdate()
@@ -117,44 +175,115 @@ public class PlayerObject : MonoBehaviour
         if(other.gameObject.CompareTag("BrainSlayer")){
             Animator brainSlayerAnimator = other.gameObject.GetComponent<Animator>();
             BrainSlayerScript brainSlayerScript = other.gameObject.GetComponent<BrainSlayerScript>();
-            //BrainSlayerLives = brainSlayerScript.Lives;
             bool attack = false;
             foreach (ContactPoint2D contact in other.contacts)
             {
                 if (contact.otherCollider == weaponCollider)
                 {
-                    if (brainSlayerScript.Lives > 0){
+                    if (brainSlayerScript.Health > meleDamage){
                         brainSlayerAnimator.SetTrigger("Hit");
                         attack = true;
 
                     } else if (brainSlayerAnimator.GetBool("alive")){
                         brainSlayerAnimator.SetBool("alive", false);
+                        other.collider.enabled = false;
                         brainSlayerAnimator.SetTrigger("Death");
-                        if(brainSlayerAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1){
-                            
-                        }
+                        
                     }
 
-                    brainSlayerScript.Lives -=1;
+                    brainSlayerScript.Health -= meleDamage;
                     
                     break; // Stop checking after the first match
                 }
-                if (contact.otherCollider == characterCollider)
+                if (contact.otherCollider == characterCollider && brainSlayerAnimator.GetBool("alive"))
                     if(!attack) {
                         if (!this.isInvincible) {
-                            OnHit();
+                            OnHit(1);
                         }
             }
             }
             
         }
+
+
+
+
+        if(other.gameObject.CompareTag("AngelOfDeath")){
+            Animator angelOfDeathAnimator = other.gameObject.GetComponent<Animator>();
+            AngelOfDeathScript angelOfDeathScript = other.gameObject.GetComponent<AngelOfDeathScript>();
+            bool attack = false;
+            foreach (ContactPoint2D contact in other.contacts)
+            {
+                if (contact.otherCollider == weaponCollider && angelOfDeathAnimator.GetBool("alive"))
+                {
+                    if (angelOfDeathScript.Health > meleDamage){
+                        angelOfDeathAnimator.SetTrigger("Hit");
+                        attack = true;
+
+                    } else if (angelOfDeathAnimator.GetBool("alive")){
+                        angelOfDeathAnimator.SetBool("alive", false);
+                        
+                        angelOfDeathAnimator.SetTrigger("Death");
+                        
+                    }
+
+                    angelOfDeathScript.Health -= meleDamage;
+                    
+                    break; // Stop checking after the first match
+                }
+                if (contact.otherCollider == characterCollider && angelOfDeathAnimator.GetBool("alive"))
+                    if(!attack) {
+                        if (!this.isInvincible) {
+                            OnHit(2);
+                        }
+            }
+            }
+            
+        }
+
+
+
     }
 
-    private void OnHit() {
+    private void OnHit(int damage) {
         // Debug.Log("Got hit!");
-        this.health -= 1;
+        this.health -= damage;
         this.isInvincible = true;
         this.invincibilityTimer = this.invincibilityDuration;
         sr.color = invincibleColor;
+    }
+
+    private void SaveRoom(int position) {
+
+        if(numberOfDreamCatchers > 0){
+            GameObject targetObject = GameObject.Find("RoomController");
+            RoomController targetScript = targetObject.GetComponent<RoomController>();
+            int seed = targetScript.GetSeed();
+            bool alreadySaved = false;
+            for (int i = 0; i < 5; i++)
+            {
+                if(savedRooms[i] == seed){
+                    alreadySaved = true;
+                }
+            }
+
+            if (!alreadySaved){
+
+                savedRooms[position] = seed;
+                
+                
+                GameObject dreamCatcher = Resources.Load<GameObject>("DreamCatcher");
+                Instantiate(dreamCatcher, new Vector3(0, 0, 0), Quaternion.identity);
+                numberOfDreamCatchers --;
+            }
+        }
+    }
+
+    private void teleportToRoom(int seed){
+        GameObject targetObject = GameObject.Find("RoomController");
+        RoomController targetScript = targetObject.GetComponent<RoomController>();
+        targetScript.GenerateRoom(seed);
+        GameObject dreamCatcher = Resources.Load<GameObject>("DreamCatcher");
+        Instantiate(dreamCatcher, new Vector3(0, 0, 0), Quaternion.identity);
     }
 }

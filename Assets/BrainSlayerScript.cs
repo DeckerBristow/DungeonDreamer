@@ -7,14 +7,18 @@ public class BrainSlayerScript : MonoBehaviour
     // Start is called before the first frame update
     private Rigidbody2D playerRb;
     [SerializeField] private Rigidbody2D brainSlayerRb;
+    public GameObject gameObjectWithCollider;
     private float movementSpeed = .025f;
 
-    public int Lives = 3;
+    private BoxCollider2D boxCollider;
+
+    public int Health = 10;
     public Animator animator;
 
     void Start()
     {
         playerRb = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -41,11 +45,11 @@ public class BrainSlayerScript : MonoBehaviour
 
             }
             if (brainSlayerRb.transform.position.y > (playerRb.transform.position.y-.5)){
-                brainSlayerRb.transform.Translate(0, (-1*movementSpeed), 0);
+                brainSlayerRb.transform.Translate(0, (-1*movementSpeed/2), 0);
 
             }
             if (brainSlayerRb.transform.position.y < playerRb.transform.position.y-.5){
-                brainSlayerRb.transform.Translate(0, (movementSpeed), 0);
+                brainSlayerRb.transform.Translate(0, (movementSpeed/2), 0);
 
             }
         }
@@ -54,7 +58,19 @@ public class BrainSlayerScript : MonoBehaviour
     }
     public void DestroyEnemy()
     {
-        Debug.Log("Should destroy");
+
         Destroy(gameObject);
+        
+    }
+
+    public void Died()
+    {
+
+        boxCollider.enabled = false;
+
+        float x = gameObject.transform.position.x;
+        float y = gameObject.transform.position.y;
+        GameObject gem = Resources.Load<GameObject>("Gem");
+        Instantiate(gem, new Vector3(x, y, 0), Quaternion.identity);
     }
 }

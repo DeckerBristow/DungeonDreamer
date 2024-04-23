@@ -8,6 +8,7 @@ public class RoomController : MonoBehaviour
 {
     private int seed;
     public GameObject enemyPrefab;
+    public GameObject shopDisplay;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +22,6 @@ public class RoomController : MonoBehaviour
     }
 
     public void GenerateRoom(int newSeed) {
-
         if (newSeed == 0) {
             newSeed = UnityEngine.Random.Range(1,MaxValue);
         }
@@ -30,17 +30,28 @@ public class RoomController : MonoBehaviour
         System.Random random = new System.Random(this.seed);
         generateEnemies(ref random);
         generateHealthPickups(ref random);
+        generateShop(ref random);
     }
 
     private void generateEnemies(ref System.Random random) {
-        GameObject[] existingEnemies = GameObject.FindGameObjectsWithTag("BrainSlayer");
-        foreach (GameObject enemy in existingEnemies)
+        GameObject[] existingBrains = GameObject.FindGameObjectsWithTag("BrainSlayer");
+        foreach (GameObject brain in existingBrains)
         {
-            Destroy(enemy);
+            Destroy(brain);
+        }
+        GameObject[] existingAngels = GameObject.FindGameObjectsWithTag("AngelOfDeath");
+        foreach (GameObject angel in existingAngels)
+        {
+            Destroy(angel);
+        }
+        GameObject[] existingCatcher = GameObject.FindGameObjectsWithTag("DreamCatcher");
+        foreach (GameObject catcher in existingCatcher)
+        {
+            Destroy(catcher);
         }
         int enemies = random.Next(1, 5);
         for (int i = 0; i < enemies; i++) {
-            float x = random.Next(-1465, 1530)/100.0f;
+            float x = random.Next(-1100, 1100)/100.0f;
             float y = random.Next(-389, 483)/100.0f;
             GameObject enemyPrefab = Resources.Load<GameObject>("BrainSlayer");
             Instantiate(enemyPrefab, new Vector3(x, y, 0), Quaternion.identity);
@@ -67,10 +78,28 @@ public class RoomController : MonoBehaviour
             healthPickups = 1;
         }
         for (int i = 0; i < healthPickups; i++) {
-            float x = random.Next(-1465, 1530)/100.0f;
+            float x = random.Next(-1100, 1100)/100.0f;
             float y = random.Next(-389, 483)/100.0f;
             GameObject healthPrefab = Resources.Load<GameObject>("HealthPickup");
             Instantiate(healthPrefab, new Vector3(x, y, 0), Quaternion.identity);
         }
+    }
+
+    private void generateShop(ref System.Random random) {
+        GameObject[] existingShops = GameObject.FindGameObjectsWithTag("Shop");
+        foreach (GameObject shop in existingShops) {
+            Destroy(shop);
+        }
+        if (random.Next(1, 100) > 80) {
+            float x = random.Next(-1100, 1100)/100.0f;
+            float y = random.Next(-389, 483)/100.0f;
+            GameObject shopPrefab = Resources.Load<GameObject>("Shop");
+            Instantiate(shopPrefab, new Vector3(x, y, 0), Quaternion.identity);
+            shopDisplay.GetComponent<ShopManager>().generateShopItems(ref random);
+        }
+    }
+
+    public int GetSeed(){
+        return seed;
     }
 }

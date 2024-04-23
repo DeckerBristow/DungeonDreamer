@@ -6,6 +6,12 @@ TagManager:
   tags:
   - BrainSlayer
   - HealthPickup
+  - Enemy
+  - AngelOfDeath
+  - ScoreTag
+  - Shop
+  - ShopItem
+  - DreamCatcher
   layers:
   - Default
   - TransparentFX
@@ -13,8 +19,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Player
+  - Enemy
   - 
   - 
   - 
