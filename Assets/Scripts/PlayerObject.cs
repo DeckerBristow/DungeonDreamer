@@ -14,10 +14,14 @@ public class PlayerObject : MonoBehaviour
     [SerializeField] private SpriteRenderer sr;
     public Animator animator;
 
+    public List<int> savedRooms = new List<int>(5);
+
     public int meleDamage = 3;
     public int rangedDamage = 2;
     public int rangedSpeed = 5;
     
+    public int numberOfDreamCatchers = 3;
+
 
     public CapsuleCollider2D weaponCollider;
 
@@ -41,6 +45,10 @@ public class PlayerObject : MonoBehaviour
         originalColor = sr.color;
         // gems = 100;
         Debug.Log(gems);
+        for (int i = 0; i < 5; i++)
+        {
+            savedRooms.Add(0); // Replace 0 with the default value you want
+        }
     }
 
     // Update is called once per frame
@@ -74,6 +82,52 @@ public class PlayerObject : MonoBehaviour
                 flashTimer = 0.15f;
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            
+            if(savedRooms[0] == 0){
+                SaveRoom(0);
+            }else{
+                teleportToRoom(savedRooms[0]);
+            }
+            
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+    
+            if(savedRooms[1] == 0){
+                SaveRoom(1);
+            }else{
+                teleportToRoom(savedRooms[1]);
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            
+            if(savedRooms[2] == 0){
+                SaveRoom(2);
+            }else{
+                teleportToRoom(savedRooms[2]);
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            if(savedRooms[3] == 0){
+                SaveRoom(3);
+            }else{
+                teleportToRoom(savedRooms[3]);
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+           if(savedRooms[4] == 0){
+                SaveRoom(4);
+            }else{
+                teleportToRoom(savedRooms[4]);
+            }
+        }
+
     }
 
     private void FixedUpdate()
@@ -197,5 +251,39 @@ public class PlayerObject : MonoBehaviour
         this.isInvincible = true;
         this.invincibilityTimer = this.invincibilityDuration;
         sr.color = invincibleColor;
+    }
+
+    private void SaveRoom(int position) {
+
+        if(numberOfDreamCatchers > 0){
+            GameObject targetObject = GameObject.Find("RoomController");
+            RoomController targetScript = targetObject.GetComponent<RoomController>();
+            int seed = targetScript.GetSeed();
+            bool alreadySaved = false;
+            for (int i = 0; i < 5; i++)
+            {
+                if(savedRooms[i] == seed){
+                    alreadySaved = true;
+                }
+            }
+
+            if (!alreadySaved){
+
+                savedRooms[position] = seed;
+                
+                
+                GameObject dreamCatcher = Resources.Load<GameObject>("DreamCatcher");
+                Instantiate(dreamCatcher, new Vector3(0, 0, 0), Quaternion.identity);
+                numberOfDreamCatchers --;
+            }
+        }
+    }
+
+    private void teleportToRoom(int seed){
+        GameObject targetObject = GameObject.Find("RoomController");
+        RoomController targetScript = targetObject.GetComponent<RoomController>();
+        targetScript.GenerateRoom(seed);
+        GameObject dreamCatcher = Resources.Load<GameObject>("DreamCatcher");
+        Instantiate(dreamCatcher, new Vector3(0, 0, 0), Quaternion.identity);
     }
 }

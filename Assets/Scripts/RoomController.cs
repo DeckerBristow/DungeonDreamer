@@ -34,10 +34,20 @@ public class RoomController : MonoBehaviour
     }
 
     private void generateEnemies(ref System.Random random) {
-        GameObject[] existingEnemies = GameObject.FindGameObjectsWithTag("BrainSlayer");
-        foreach (GameObject enemy in existingEnemies)
+        GameObject[] existingBrains = GameObject.FindGameObjectsWithTag("BrainSlayer");
+        foreach (GameObject brain in existingBrains)
         {
-            Destroy(enemy);
+            Destroy(brain);
+        }
+        GameObject[] existingAngels = GameObject.FindGameObjectsWithTag("AngelOfDeath");
+        foreach (GameObject angel in existingAngels)
+        {
+            Destroy(angel);
+        }
+        GameObject[] existingCatcher = GameObject.FindGameObjectsWithTag("DreamCatcher");
+        foreach (GameObject catcher in existingCatcher)
+        {
+            Destroy(catcher);
         }
         int enemies = random.Next(1, 5);
         for (int i = 0; i < enemies; i++) {
@@ -87,5 +97,9 @@ public class RoomController : MonoBehaviour
             Instantiate(shopPrefab, new Vector3(x, y, 0), Quaternion.identity);
             shopDisplay.GetComponent<ShopManager>().generateShopItems(ref random);
         }
+    }
+
+    public int GetSeed(){
+        return seed;
     }
 }

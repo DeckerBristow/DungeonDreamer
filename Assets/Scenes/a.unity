@@ -389,9 +389,11 @@ MonoBehaviour:
   rb: {fileID: 99293979}
   sr: {fileID: 99293977}
   animator: {fileID: 99293982}
+  savedRooms: 
   meleDamage: 3
   rangedDamage: 2
   rangedSpeed: 5
+  numberOfDreamCatchers: 3
   weaponCollider: {fileID: 99293984}
   characterCollider: {fileID: 99293981}
   health: 5
@@ -6483,6 +6485,75 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de8214d519f7f3446a87a1632ba3a7aa, type: 3}
+--- !u!1001 &6435096395022209954
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2787979535768790564, guid: b41d0063bb8ff497f95ff9399ed561a9, type: 3}
+      propertyPath: m_Name
+      value: DreamCatcher
+      objectReference: {fileID: 0}
+    - target: {fileID: 2787979535768790564, guid: b41d0063bb8ff497f95ff9399ed561a9, type: 3}
+      propertyPath: m_TagString
+      value: DreamCatcher
+      objectReference: {fileID: 0}
+    - target: {fileID: 7465023630762977058, guid: b41d0063bb8ff497f95ff9399ed561a9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7465023630762977058, guid: b41d0063bb8ff497f95ff9399ed561a9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7465023630762977058, guid: b41d0063bb8ff497f95ff9399ed561a9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 18.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 7465023630762977058, guid: b41d0063bb8ff497f95ff9399ed561a9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7465023630762977058, guid: b41d0063bb8ff497f95ff9399ed561a9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10.08768
+      objectReference: {fileID: 0}
+    - target: {fileID: 7465023630762977058, guid: b41d0063bb8ff497f95ff9399ed561a9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7465023630762977058, guid: b41d0063bb8ff497f95ff9399ed561a9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7465023630762977058, guid: b41d0063bb8ff497f95ff9399ed561a9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7465023630762977058, guid: b41d0063bb8ff497f95ff9399ed561a9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7465023630762977058, guid: b41d0063bb8ff497f95ff9399ed561a9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7465023630762977058, guid: b41d0063bb8ff497f95ff9399ed561a9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7465023630762977058, guid: b41d0063bb8ff497f95ff9399ed561a9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b41d0063bb8ff497f95ff9399ed561a9, type: 3}
 --- !u!1001 &6984882289783307099
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6831,7 +6902,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1797360846009258708, guid: 74b37123016e8cf4bba1c5a7f5896148, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1.0211945
+      value: 1.0211792
       objectReference: {fileID: 0}
     - target: {fileID: 1797360846009258708, guid: 74b37123016e8cf4bba1c5a7f5896148, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -6895,3 +6966,4 @@ SceneRoots:
   - {fileID: 361406568385546513}
   - {fileID: 6984882289783307099}
   - {fileID: 306512591}
+  - {fileID: 6435096395022209954}
