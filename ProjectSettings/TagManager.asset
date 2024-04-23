@@ -11,6 +11,7 @@ TagManager:
   - ScoreTag
   - Shop
   - ShopItem
+  - DreamCatcher
   layers:
   - Default
   - TransparentFX

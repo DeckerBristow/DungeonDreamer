@@ -20,6 +20,7 @@ public class PlayerObject : MonoBehaviour
     public int rangedDamage = 2;
     public int rangedSpeed = 5;
     
+    public int numberOfDreamCatchers = 3;
 
 
     public CapsuleCollider2D weaponCollider;
@@ -253,15 +254,28 @@ public class PlayerObject : MonoBehaviour
     }
 
     private void SaveRoom(int position) {
-        GameObject targetObject = GameObject.Find("RoomController");
-        RoomController targetScript = targetObject.GetComponent<RoomController>();
-        int seed = targetScript.GetSeed();
 
-        savedRooms[position] = seed;
-        Debug.Log("SEEEED" + seed);
-        for (int i = 0; i < 5; i++)
-        {
-            Debug.Log("ROOM"+i+"SEED"+savedRooms[i]);
+        if(numberOfDreamCatchers > 0){
+            GameObject targetObject = GameObject.Find("RoomController");
+            RoomController targetScript = targetObject.GetComponent<RoomController>();
+            int seed = targetScript.GetSeed();
+            bool alreadySaved = false;
+            for (int i = 0; i < 5; i++)
+            {
+                if(savedRooms[i] == seed){
+                    alreadySaved = true;
+                }
+            }
+
+            if (!alreadySaved){
+
+                savedRooms[position] = seed;
+                
+                
+                GameObject dreamCatcher = Resources.Load<GameObject>("DreamCatcher");
+                Instantiate(dreamCatcher, new Vector3(0, 0, 0), Quaternion.identity);
+                numberOfDreamCatchers --;
+            }
         }
     }
 
@@ -269,5 +283,7 @@ public class PlayerObject : MonoBehaviour
         GameObject targetObject = GameObject.Find("RoomController");
         RoomController targetScript = targetObject.GetComponent<RoomController>();
         targetScript.GenerateRoom(seed);
+        GameObject dreamCatcher = Resources.Load<GameObject>("DreamCatcher");
+        Instantiate(dreamCatcher, new Vector3(0, 0, 0), Quaternion.identity);
     }
 }
