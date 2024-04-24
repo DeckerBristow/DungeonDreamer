@@ -49,11 +49,18 @@ public class RoomController : MonoBehaviour
         {
             Destroy(catcher);
         }
-        int enemies = random.Next(1, 5);
-        for (int i = 0; i < enemies; i++) {
+        int brainSlayers = random.Next(1, 5);
+        for (int i = 0; i < brainSlayers; i++) {
             float x = random.Next(-1100, 1100)/100.0f;
             float y = random.Next(-389, 483)/100.0f;
             GameObject enemyPrefab = Resources.Load<GameObject>("BrainSlayer");
+            Instantiate(enemyPrefab, new Vector3(x, y, 0), Quaternion.identity);
+        }
+        int angels = random.Next(0, 2);
+        for (int i = 0; i < angels; i++) {
+            float x = random.Next(-1100, 1100)/100.0f;
+            float y = random.Next(-389, 483)/100.0f;
+            GameObject enemyPrefab = Resources.Load<GameObject>("AngelOfDeath");
             Instantiate(enemyPrefab, new Vector3(x, y, 0), Quaternion.identity);
         }
     }
