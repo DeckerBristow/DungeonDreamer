@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerObject : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class PlayerObject : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private SpriteRenderer sr;
     public Animator animator;
+
+    public GameObject gameOverPanel; 
 
     public List<int> savedRooms = new List<int>(5);
 
@@ -52,6 +55,8 @@ public class PlayerObject : MonoBehaviour
         {
             savedRooms.Add(0); // Replace 0 with the default value you want
         }
+
+        // gam = GameObject.FindWithTag("YourTagHere");
         
     }
 
@@ -255,6 +260,14 @@ public class PlayerObject : MonoBehaviour
         this.isInvincible = true;
         this.invincibilityTimer = this.invincibilityDuration;
         sr.color = invincibleColor;
+        if(this.health<=0){
+            PlayerDeath();
+        }
+    }
+
+    private void PlayerDeath(){
+        Time.timeScale = 0;
+        gameOverPanel.SetActive(true);
     }
 
     private void SaveRoom(int position) {
