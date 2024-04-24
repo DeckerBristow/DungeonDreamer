@@ -43,7 +43,7 @@ public class PlayerObject : MonoBehaviour
     {
         transform.position = new Vector3(0.33f, 0.24f, 0.0f);
         originalColor = sr.color;
-        // gems = 100;
+        gems = 0;
         Debug.Log(gems);
         for (int i = 0; i < 5; i++)
         {

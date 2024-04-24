@@ -28,6 +28,9 @@ public class ShopManager : MonoBehaviour
 
     public void CloseMenu() {
         shopPanel.SetActive(false);
+        if(shopPhysical == null) {
+            shopPhysical = GameObject.FindWithTag("Shop");
+        }
         shopPhysical.GetComponent<ShopTrigger>().InvokeCloseMenu();
         Time.timeScale = 1;
     }
