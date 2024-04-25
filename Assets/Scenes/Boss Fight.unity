@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d4b2bd9c2fca0a43a2a15f33dfcab9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  demonRb: {fileID: 0}
+  demonRb: {fileID: 315365172}
   gameObjectWithCollider: {fileID: 0}
   Health: 10
   animator: {fileID: 315365167}
@@ -319,7 +319,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &556348187
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,7 +483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 604424577}
-  rb: {fileID: 0}
+  rb: {fileID: 604424579}
   fireBallPrefab: {fileID: 0}
   lastDirection: {x: 0, y: 0}
 --- !u!95 &604424577
