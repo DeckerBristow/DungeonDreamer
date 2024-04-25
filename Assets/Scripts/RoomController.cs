@@ -36,10 +36,11 @@ public class RoomController : MonoBehaviour
         generateHealthPickups(ref random);
         generateShop(ref random);
         generateDecorations( ref random);
+        generatePortal(ref random);
 
     }
 
-    void DeactivateAllTilemaps()
+    public void DeactivateAllTilemaps()
     {
         foreach (var tilemap in leftDecorations)
         {
@@ -52,7 +53,8 @@ public class RoomController : MonoBehaviour
         }
     }
 
-    private void generateDecorations(ref System.Random random){
+
+    public void generateDecorations(ref System.Random random){
         DeactivateAllTilemaps();
         int indexLeft = random.Next(leftDecorations.Count); // Get a random index based on the seed
        // DeactivateAllTilemaps(); // Deactivate all tilemaps first
@@ -119,6 +121,22 @@ public class RoomController : MonoBehaviour
             float y = random.Next(-389, 483)/100.0f;
             GameObject healthPrefab = Resources.Load<GameObject>("HealthPickup");
             Instantiate(healthPrefab, new Vector3(x, y, 0), Quaternion.identity);
+        }
+    }
+
+    private void generatePortal(ref System.Random random) {
+        GameObject[] existingPortals = GameObject.FindGameObjectsWithTag("Portal");
+        foreach (GameObject portal in existingPortals) {
+            Destroy(portal);
+        }
+        int val = random.Next(1, 100);
+        int healthPickups = 0;
+        if(val > 90) {
+            
+            float x = random.Next(-1100, 1100)/100.0f;
+            float y = random.Next(-389, 483)/100.0f;
+            GameObject portalPrefab = Resources.Load<GameObject>("Portal");
+            Instantiate(portalPrefab, new Vector3(x, y, 0), Quaternion.identity);
         }
     }
 

@@ -88,6 +88,35 @@ public class FireBallMovement : MonoBehaviour
             
         }
 
+
+        if(other.gameObject.CompareTag("Demon")){
+            Animator demonAnimator = other.gameObject.GetComponent<Animator>();
+            DemonScript demonScript = other.gameObject.GetComponent<DemonScript>();
+            bool attack = false;
+            foreach (ContactPoint2D contact in other.contacts)
+            {
+                
+                if (demonScript.Health > fireBallDamage){
+                    demonAnimator.SetTrigger("Hit");
+                    attack = true;
+
+                } else if (demonAnimator.GetBool("alive")){
+                    demonAnimator.SetBool("alive", false);
+                    demonAnimator.SetTrigger("Death");
+                    if(demonAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1){
+                        
+                    }
+                }
+
+                demonScript.Health -= fireBallDamage;
+                
+                break; // Stop checking after the first match
+                
+                
+            }
+            
+        }
+
      }
 
      }

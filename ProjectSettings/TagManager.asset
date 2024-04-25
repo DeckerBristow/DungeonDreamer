@@ -13,6 +13,11 @@ TagManager:
   - ShopItem
   - DreamCatcher
   - GameOverScreen
+  - Undefined
+  - Demon
+  - RoomController
+  - WallTrigger
+  - Portal
   layers:
   - Default
   - TransparentFX

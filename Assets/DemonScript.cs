@@ -7,12 +7,14 @@ public class DemonScript : MonoBehaviour
     private Rigidbody2D playerRb;
     [SerializeField] private Rigidbody2D demonRb;
     public GameObject gameObjectWithCollider;
-    private float movementSpeed = .025f;
+    private float movementSpeed = .035f;
 
     private BoxCollider2D boxCollider;
 
-    public int Health = 10;
+    public int Health = 50;
     public float attackDistance = 2f;
+
+    public GameObject winPanel; 
 
     public Animator animator;
     private bool isAttacking = false;
@@ -68,15 +70,17 @@ public class DemonScript : MonoBehaviour
     public void DestroyEnemy()
     {
         Destroy(gameObject);
+        Time.timeScale = 0;
+        winPanel.SetActive(true);
     }
 
     public void Died()
     {
         boxCollider.enabled = false;
 
-        float x = gameObject.transform.position.x;
-        float y = gameObject.transform.position.y;
-        GameObject gem = Resources.Load<GameObject>("Gem");
-        Instantiate(gem, new Vector3(x, y, 0), Quaternion.identity);
+        // float x = gameObject.transform.position.x;
+        // float y = gameObject.transform.position.y;
+        // GameObject gem = Resources.Load<GameObject>("Gem");
+        // Instantiate(gem, new Vector3(x, y, 0), Quaternion.identity);
     }
 }

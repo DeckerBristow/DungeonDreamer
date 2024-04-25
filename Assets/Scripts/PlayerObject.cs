@@ -250,6 +250,41 @@ public class PlayerObject : MonoBehaviour
             
         }
 
+        if(other.gameObject.CompareTag("Demon")){
+            Animator demonAnimator = other.gameObject.GetComponent<Animator>();
+            DemonScript demonScript = other.gameObject.GetComponent<DemonScript>();
+            bool attack = false;
+            foreach (ContactPoint2D contact in other.contacts)
+            {
+                if (contact.otherCollider == weaponCollider && demonAnimator.GetBool("alive"))
+                {
+                    if (demonScript.Health > meleDamage){
+                        demonAnimator.SetTrigger("Hit");
+                        attack = true;
+
+                    } else if (demonAnimator.GetBool("alive")){
+                        demonAnimator.SetBool("alive", false);
+                        
+                        demonAnimator.SetTrigger("Death");
+                        
+                    }
+
+                    demonScript.Health -= meleDamage;
+                    
+                    break; // Stop checking after the first match
+                }
+                if (contact.otherCollider == characterCollider && demonAnimator.GetBool("alive"))
+                    if(!attack) {
+                        if (!this.isInvincible) {
+
+                            OnHit(3);
+                            
+                        }
+            }
+            }
+            
+        }
+
 
 
     }
