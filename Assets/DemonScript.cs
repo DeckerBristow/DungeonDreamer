@@ -44,11 +44,11 @@ public class DemonScript : MonoBehaviour
 
 
             }
-            if (demonRb.transform.position.y > (playerRb.transform.position.y-.5)){
+            if (demonRb.transform.position.y > (playerRb.transform.position.y+1)){
                 demonRb.transform.Translate(0, (-1*movementSpeed/2), 0);
 
             }
-            if (demonRb.transform.position.y < playerRb.transform.position.y-.5){
+            if (demonRb.transform.position.y < playerRb.transform.position.y+1){
                 demonRb.transform.Translate(0, (movementSpeed/2), 0);
 
             }
