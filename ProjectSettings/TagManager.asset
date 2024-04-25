@@ -12,6 +12,7 @@ TagManager:
   - Shop
   - ShopItem
   - DreamCatcher
+  - Demon
   layers:
   - Default
   - TransparentFX
