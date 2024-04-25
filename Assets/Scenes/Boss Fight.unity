@@ -247,7 +247,7 @@ MonoBehaviour:
   demonRb: {fileID: 0}
   gameObjectWithCollider: {fileID: 0}
   Health: 10
-  animator: {fileID: 0}
+  animator: {fileID: 315365167}
 --- !u!61 &315365171
 BoxCollider2D:
   m_ObjectHideFlags: 0
