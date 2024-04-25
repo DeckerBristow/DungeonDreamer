@@ -61,6 +61,16 @@ public class Shop_RangedItem : MonoBehaviour
                 currentLevel++;
             }
             player.rangedDamage = rangedLevels[currentLevel];
+            // 3. feedback
+            GameObject feedbackObj = GameObject.Find("PurchaseFeedback");
+            if(feedbackObj != null) {
+                if(feedbackObj.GetComponent<TextMeshProUGUI>().color.a == 0) {
+                    feedbackObj.GetComponent<FeedbackController>().Activate();
+                }
+                TextMeshProUGUI feedbackText = feedbackObj.GetComponent<TextMeshProUGUI>();
+                feedbackText.text = "Upgraded Fireball DMG To Level " + (currentLevel + 1) + "!";
+                feedbackObj.GetComponent<FeedbackController>().ChangedText();
+            }
         }
     }
 }

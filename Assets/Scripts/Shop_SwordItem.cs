@@ -51,6 +51,16 @@ public class Shop_SwordItem : MonoBehaviour
                 currentLevel++;
             }
             player.meleDamage = meleeLevels[currentLevel];
+            // 3. feedback
+            GameObject feedbackObj = GameObject.Find("PurchaseFeedback");
+            if(feedbackObj != null) {
+                if(feedbackObj.GetComponent<TextMeshProUGUI>().color.a == 0) {
+                    feedbackObj.GetComponent<FeedbackController>().Activate();
+                }
+                TextMeshProUGUI feedbackText = feedbackObj.GetComponent<TextMeshProUGUI>();
+                feedbackText.text = "Upgraded Sword DMG To Level " + (currentLevel + 1) + "!";
+                feedbackObj.GetComponent<FeedbackController>().ChangedText();
+            }
         }
     }
 }

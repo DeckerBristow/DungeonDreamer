@@ -56,16 +56,26 @@ public class Shop_RangedSpeedUpgrade : MonoBehaviour
             textMesh.text = ""+player.gems;
             UpdateButtonColor();
             // 2. increase damage 
-            Debug.Log("current ranged speed: " + player.rangedSpeed);
+            // Debug.Log("current ranged speed: " + player.rangedSpeed);
             int currentLevel = Array.IndexOf(rangedSpeeds, player.rangedSpeed);
-            Debug.Log("old level: " + currentLevel);
+            // Debug.Log("old level: " + currentLevel);
             if (currentLevel < 4) {
                 currentLevel++;
             }
-            Debug.Log("new level: " + currentLevel);
-            Debug.Log("ranged speed to set to: " + rangedSpeeds[currentLevel]);
+            // Debug.Log("new level: " + currentLevel);
+            // Debug.Log("ranged speed to set to: " + rangedSpeeds[currentLevel]);
             player.rangedSpeed = rangedSpeeds[currentLevel];
-            Debug.Log("new ranged speed: " + player.rangedSpeed);
+            // Debug.Log("new ranged speed: " + player.rangedSpeed);
+            // 3. feedback
+            GameObject feedbackObj = GameObject.Find("PurchaseFeedback");
+            if(feedbackObj != null) {
+                if(feedbackObj.GetComponent<TextMeshProUGUI>().color.a == 0) {
+                    feedbackObj.GetComponent<FeedbackController>().Activate();
+                }
+                TextMeshProUGUI feedbackText = feedbackObj.GetComponent<TextMeshProUGUI>();
+                feedbackText.text = "Upgraded Fireball Speed To Level " + (currentLevel + 1) + "!";
+                feedbackObj.GetComponent<FeedbackController>().ChangedText();
+            }
         }
     }
 }

@@ -55,6 +55,16 @@ public class Shop_DreamCatcher : MonoBehaviour
             UpdateButtonColor();
             // 2. increase dream catchers
             player.numberOfDreamCatchers++;
+            // 3. feedback
+            GameObject feedbackObj = GameObject.Find("PurchaseFeedback");
+            if(feedbackObj != null) {
+                if(feedbackObj.GetComponent<TextMeshProUGUI>().color.a == 0) {
+                    feedbackObj.GetComponent<FeedbackController>().Activate();
+                }
+                TextMeshProUGUI feedbackText = feedbackObj.GetComponent<TextMeshProUGUI>();
+                feedbackText.text = "Purchased Dream Catcher!";
+                feedbackObj.GetComponent<FeedbackController>().ChangedText();
+            }
         }
     }
 }

@@ -4,25 +4,15 @@ using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour
 {
-    // [System.Serializable]
-    // public struct ShopItem
-    // {
-    //     public Sprite itemSprite;
-    //     public int price;
-    //     public string itemName;
-    // }
-
-    // public ShopItem[] itemsForSale;
-    // public GameObject itemTemplate;
     public GameObject shopPanel;
+    public GameObject shopPhysical;
     public RectTransform[] itemPositions;
-    // public string[] shopItems = {"Shop_SwordUpgrade", "Shop_FireballUpgrade", "Shop_RangedSpeedUpgrade"};
-    private List<GameObject> shopItems; // Store references to the item GameObjects
-
+    private List<GameObject> shopItems; 
 
     void Start()
     {
         shopPanel.SetActive(false);
+        shopPanel.transform.SetAsLastSibling();
         InitializeShopItems();
     }
     
@@ -38,6 +28,10 @@ public class ShopManager : MonoBehaviour
 
     public void CloseMenu() {
         shopPanel.SetActive(false);
+        if(shopPhysical == null) {
+            shopPhysical = GameObject.FindWithTag("Shop");
+        }
+        shopPhysical.GetComponent<ShopTrigger>().InvokeCloseMenu();
         Time.timeScale = 1;
     }
 
@@ -59,6 +53,9 @@ public class ShopManager : MonoBehaviour
 
     public void generateShopItems(ref System.Random random) {
         PlayerObject player = GameObject.FindWithTag("Player").GetComponent<PlayerObject>();
+        if(shopItems == null) {
+            InitializeShopItems();
+        }
         List<GameObject> eligibleShopItems = new List<GameObject>(shopItems);
 
         foreach (GameObject item in shopItems) {
