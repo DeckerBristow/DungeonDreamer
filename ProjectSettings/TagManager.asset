@@ -12,6 +12,7 @@ TagManager:
   - Shop
   - ShopItem
   - DreamCatcher
+  - GameOverScreen
   layers:
   - Default
   - TransparentFX

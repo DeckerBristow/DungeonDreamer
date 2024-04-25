@@ -106,6 +106,8 @@ public class AngelOfDeathScript : MonoBehaviour
         float y = gameObject.transform.position.y;
         GameObject gem = Resources.Load<GameObject>("Gem");
         Instantiate(gem, new Vector3(x, y, 0), Quaternion.identity);
+        Instantiate(gem, new Vector3(x+1, y, 0), Quaternion.identity);
+        
     }
 }
 

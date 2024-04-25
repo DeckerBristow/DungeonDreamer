@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using static System.Int32;
 using UnityEngine;
 using System;
+using UnityEngine.Tilemaps;
+
 
 public class RoomController : MonoBehaviour
 {
     private int seed;
     public GameObject enemyPrefab;
     public GameObject shopDisplay;
+    public List<Tilemap> leftDecorations;
+    public List<Tilemap> rightDecorations;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +35,32 @@ public class RoomController : MonoBehaviour
         generateEnemies(ref random);
         generateHealthPickups(ref random);
         generateShop(ref random);
+        generateDecorations( ref random);
+
+    }
+
+    void DeactivateAllTilemaps()
+    {
+        foreach (var tilemap in leftDecorations)
+        {
+            tilemap.gameObject.SetActive(false); // Deactivate each tilemap
+        }
+
+         foreach (var tilemap in rightDecorations)
+        {
+            tilemap.gameObject.SetActive(false); // Deactivate each tilemap
+        }
+    }
+
+    private void generateDecorations(ref System.Random random){
+        DeactivateAllTilemaps();
+        int indexLeft = random.Next(leftDecorations.Count); // Get a random index based on the seed
+       // DeactivateAllTilemaps(); // Deactivate all tilemaps first
+        leftDecorations[indexLeft].gameObject.SetActive(true);
+
+        int indexRight = random.Next(rightDecorations.Count); // Get a random index based on the seed
+       // DeactivateAllTilemaps(); // Deactivate all tilemaps first
+        rightDecorations[indexRight].gameObject.SetActive(true);
     }
 
     private void generateEnemies(ref System.Random random) {
@@ -49,11 +79,18 @@ public class RoomController : MonoBehaviour
         {
             Destroy(catcher);
         }
-        int enemies = random.Next(1, 5);
-        for (int i = 0; i < enemies; i++) {
+        int brainSlayers = random.Next(1, 5);
+        for (int i = 0; i < brainSlayers; i++) {
             float x = random.Next(-1100, 1100)/100.0f;
             float y = random.Next(-389, 483)/100.0f;
             GameObject enemyPrefab = Resources.Load<GameObject>("BrainSlayer");
+            Instantiate(enemyPrefab, new Vector3(x, y, 0), Quaternion.identity);
+        }
+        int angels = random.Next(0, 2);
+        for (int i = 0; i < angels; i++) {
+            float x = random.Next(-1100, 1100)/100.0f;
+            float y = random.Next(-389, 483)/100.0f;
+            GameObject enemyPrefab = Resources.Load<GameObject>("AngelOfDeath");
             Instantiate(enemyPrefab, new Vector3(x, y, 0), Quaternion.identity);
         }
     }
