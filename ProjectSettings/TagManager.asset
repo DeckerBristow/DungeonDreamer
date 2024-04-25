@@ -18,6 +18,7 @@ TagManager:
   - RoomController
   - WallTrigger
   - Portal
+  - YouWinTag
   layers:
   - Default
   - TransparentFX
