@@ -12,7 +12,7 @@ public class DemonScript : MonoBehaviour
 
     private BoxCollider2D boxCollider;
 
-    public int Health = 100;
+    public int Health = 10;
     public Animator animator;
 
     void Start()

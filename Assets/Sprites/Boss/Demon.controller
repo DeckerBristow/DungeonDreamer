@@ -118,7 +118,7 @@ AnimatorController:
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 0
+    m_DefaultBool: 1
     m_Controller: {fileID: 0}
   - m_Name: isWalkingLeft
     m_Type: 4
@@ -255,7 +255,7 @@ AnimatorStateMachine:
     m_Position: {x: 240, y: -100, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 637035322516908902}
-    m_Position: {x: 790, y: -40, z: 0}
+    m_Position: {x: 810, y: -90, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: 7913280373085031517}

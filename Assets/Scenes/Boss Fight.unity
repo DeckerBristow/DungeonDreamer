@@ -134,10 +134,10 @@ GameObject:
   - component: {fileID: 315365169}
   - component: {fileID: 315365168}
   - component: {fileID: 315365167}
+  - component: {fileID: 315365170}
   - component: {fileID: 315365172}
   - component: {fileID: 315365171}
-  - component: {fileID: 315365170}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Demon
   m_TagString: Demon
   m_Icon: {fileID: 0}
@@ -245,7 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   demonRb: {fileID: 315365172}
-  gameObjectWithCollider: {fileID: 0}
+  gameObjectWithCollider: {fileID: 315365166}
   Health: 10
   animator: {fileID: 315365167}
 --- !u!61 &315365171
@@ -306,10 +306,10 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 5
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 832dc214dea9d47e2818a640df1d9b57, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
