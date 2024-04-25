@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerObject : MonoBehaviour
 {
@@ -13,6 +15,8 @@ public class PlayerObject : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private SpriteRenderer sr;
     public Animator animator;
+
+    public GameObject gameOverPanel; 
 
     public List<int> savedRooms = new List<int>(5);
 
@@ -36,6 +40,8 @@ public class PlayerObject : MonoBehaviour
     private Color originalColor;
     private Color invincibleColor = Color.red;
 
+    public Image catcherImage; 
+
     private float weaponSpeed = 0.005f;
 
     // Start is called before the first frame update
@@ -49,6 +55,9 @@ public class PlayerObject : MonoBehaviour
         {
             savedRooms.Add(0); // Replace 0 with the default value you want
         }
+
+        // gam = GameObject.FindWithTag("YourTagHere");
+        
     }
 
     // Update is called once per frame
@@ -251,6 +260,14 @@ public class PlayerObject : MonoBehaviour
         this.isInvincible = true;
         this.invincibilityTimer = this.invincibilityDuration;
         sr.color = invincibleColor;
+        if(this.health<=0){
+            PlayerDeath();
+        }
+    }
+
+    private void PlayerDeath(){
+        Time.timeScale = 0;
+        gameOverPanel.SetActive(true);
     }
 
     private void SaveRoom(int position) {
@@ -270,7 +287,11 @@ public class PlayerObject : MonoBehaviour
             if (!alreadySaved){
 
                 savedRooms[position] = seed;
-                
+                GameObject imageGameObject = GameObject.Find("Catcher"+position);
+                catcherImage = imageGameObject.GetComponent<Image>();
+                Sprite newSprite = Resources.Load<Sprite>("dreamCatcher");
+                catcherImage.sprite = newSprite;
+
                 
                 GameObject dreamCatcher = Resources.Load<GameObject>("DreamCatcher");
                 Instantiate(dreamCatcher, new Vector3(0, 0, 0), Quaternion.identity);
