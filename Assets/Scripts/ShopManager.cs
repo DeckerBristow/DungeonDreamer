@@ -53,6 +53,9 @@ public class ShopManager : MonoBehaviour
 
     public void generateShopItems(ref System.Random random) {
         PlayerObject player = GameObject.FindWithTag("Player").GetComponent<PlayerObject>();
+        if(shopItems == null) {
+            InitializeShopItems();
+        }
         List<GameObject> eligibleShopItems = new List<GameObject>(shopItems);
 
         foreach (GameObject item in shopItems) {
