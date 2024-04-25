@@ -247,6 +247,7 @@ MonoBehaviour:
   demonRb: {fileID: 315365172}
   gameObjectWithCollider: {fileID: 315365166}
   Health: 10
+  attackDistance: 2
   animator: {fileID: 315365167}
 --- !u!61 &315365171
 BoxCollider2D:
@@ -280,7 +281,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.019136012, y: -0.30999964}
+  m_Offset: {x: 0.019136012, y: -0.4483307}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -291,7 +292,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7903738, y: 0.98000085}
+  m_Size: {x: 0.7903738, y: 0.70333874}
   m_EdgeRadius: 0
 --- !u!50 &315365172
 Rigidbody2D:
